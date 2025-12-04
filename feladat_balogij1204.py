@@ -9,9 +9,39 @@ class Ember:
             return self
         else:
             return masik
-        
+
+class Auto:
+    def __init__(self, marka='', tipus='', evjarat=0):
+        self.marka = marka
+        self.tipus = tipus
+        self.evjarat = evjarat
+    def kiir(self):
+        return f'Márka: {self.marka}, Típus: {self.tipus}, Évjárat: {self.evjarat}'
+class BankSzamla:
+    def __init__(self, nev='', szamlaszam='', egyenleg=0.0):
+        self.nev = nev
+        self.szamlaszam = szamlaszam
+        self.egyenleg = egyenleg
+    def befizetes(self, osszeg):
+        self.egyenleg += osszeg
+    def kivesz(self, osszeg):
+        if osszeg > self.egyenleg:
+            print('Nincs elég egyenleg!')
+        else:
+            self.egyenleg -= osszeg
+    def kiir(self): 
+        return f'Név: {self.nev}, Számlaszám: {self.szamlaszam}, Egyenleg: {self.egyenleg} Ft'
+
+class Student:
+    def __init__(self, nev='', eletkor=0, atlag=0.0):
+        self.nev = nev
+        self.eletkor = eletkor
+        self.atlag = atlag
+    def kiir(self):
+        return f'Név: {self.nev}, Életkor: {self.eletkor}, Átlag: {self.atlag}'
+
 #feladatok listája
-feladatok = ['1. feladat – Faktoriális számítása ciklussal. Kérj be egy számot, és számold ki a faktoriálisát iterációval.','2. feladat – Kérj be egy N számot, és számold ki az 1-től N-ig terjedő számok szorzatát (faktoriális ELLENTÉTE: itt nem csak N!, hanem általánosan 1·2·3…·N).','3. feladat – Prímszám ellenőrzése. Döntsd el egy számról, hogy prímszám-e (szelekció + iteráció).','4. feladat – Számjegyek összege. Kérj be egy számot, majd számold ki a számjegyeinek összegét.','5. feladat – Lista elemeinek négyzetre emelése. Adott egy lista, készíts új listát, amely minden elem négyzetét tartalmazza.','6. feladat – Szótár gyakorlás. Kérj be 5 nevet és életkort, majd tárold őket egy dict-ben. Ezután írd ki a legidősebb személy nevét.']
+feladatok = ['1. feladat – Faktoriális számítása ciklussal. Kérj be egy számot, és számold ki a faktoriálisát iterációval.','2. feladat – Kérj be egy N számot, és számold ki az 1-től N-ig terjedő számok szorzatát (faktoriális ELLENTÉTE: itt nem csak N!, hanem általánosan 1·2·3…·N).','3. feladat – Prímszám ellenőrzése. Döntsd el egy számról, hogy prímszám-e (szelekció + iteráció).','4. feladat – Számjegyek összege. Kérj be egy számot, majd számold ki a számjegyeinek összegét.','5. feladat – Lista elemeinek négyzetre emelése. Adott egy lista, készíts új listát, amely minden elem négyzetét tartalmazza.','6. feladat – Szótár gyakorlás. Kérj be 5 nevet és életkort, majd tárold őket egy dict-ben. Ezután írd ki a legidősebb személy nevét.','7. feladat – OOP: Egyszerű Osztály. Hozz létre egy Auto osztályt, amely attribútumai: márka, típus, évjárat. Az osztály tartalmazzon metódust, ami kiírja a teljes adatot szép formában.','9. feladat – OOP + lista: Tanulók kezelése. Student osztály: név, életkor, átlag.Kérj be 3 tanulót, tedd őket listába, majd írd ki annak a nevét, akinek a legjobb az átlaga.','10. feladat – OOP: Öröklődés. Készíts egy Allat alaposztályt (név, életkor).Készíts két leszármazottat: Kutya (plusz: fajta) Macska (plusz: szín) Mindkettőnek legyen hang() metódusa, ami kiírja a saját hangját. Példányosítsd őket és hívd meg a metódust.']
 
 countFeladat = len(feladatok)
 
@@ -128,11 +158,10 @@ while (fut):
             case 6:
                 print(feladatok[sorszam-1])
                 print('Megoldas:')
-                emberek = []
-                curent = Ember()
+                emberek = {}
 
                 for i in range(5):
-                    curent.nev = str(input('Adj meg egy nevet: '))
+                    nev = str(input('Adj meg egy nevet: '))
                     notnumber = True
                     while(notnumber):
                         try:
@@ -143,22 +172,70 @@ while (fut):
                                 notnumber = False
                         except ValueError:
                             print('Ez nem egész szám!')                        
-                    curent.kor = kor
-                    emberek.append(curent)
-                    curent = Ember()
-                legidosebb = emberek[0]
-                for i in emberek:
-                    legidosebb = legidosebb.Maxkor(i)
-                print(f'A legidősebb személy: {legidosebb.nev}, kora: {legidosebb.kor} éves.')
-
+                    emberek[nev] = kor
+                legidosebb = max(emberek, key=emberek.get)
+                print(f'A legidősebb személy: {legidosebb}, kora: {emberek[legidosebb]} éves.')
             #hetedik feladat
             case 7:
                 print(feladatok[sorszam-1])
                 print('Megoldas:')
+                auto = Auto()
+                auto.marka = str(input('Add meg a márkát: '))
+                auto.tipus = str(input('Add meg a típust: '))
                 notnumber = True
                 while(notnumber):
                     try:
-                        elso = int(input('Adj meg egy pozitív egész számot: '))
+                        auto.evjarat = int(input('Adj meg egy pozitív egész számot: '))
                         notnumber = False
                     except ValueError:
-                        print('Ez nem egész szám!')                        
+                        print('Ez nem egész szám!')   
+                print('Az autó adatai:')
+                print(auto.kiir())                       
+            #nyolcadik feladat
+            case 8:
+                print(feladatok[sorszam-1])
+                print('Megoldas:')
+                szamla = BankSzamla()
+                szamlak = []
+                for _ in range(1):
+                    szamla.nev = str(input('Add meg a számla tulajdonosának nevét: '))
+                    szamla.szamlaszam = str(input('Add meg a számlaszámot: '))
+
+                    notnumber = True
+                    while(notnumber):
+                        try:
+                            szamla.egyenleg = float(input('Add meg az egyenleget: '))
+                            notnumber = False
+                        except ValueError:
+                            print('Ez nem szám!')  
+                    print('A számla adatai:')
+                    print(szamla.kiir())    
+                    szamlak.append(szamla)
+                notnumber = True
+                while(notnumber):
+                    try:
+                        szamlaszam = str(input('Add meg a számlaszámot ellenőrzésre: '))
+                        if szamlaszam != szamla.szamlaszam:
+                            print('Hibás számlaszám!')
+                        else:
+                            notnumber = False
+                        osszeg = float(input('Adj meg egy befizetési összeget: '))
+                        szamla.befizetes(osszeg)
+                        print(f'{szamla.nev} új egyenlege: {szamla.egyenleg} Ft')
+                        notnumber = False
+                    except ValueError:
+                        print('Ez nem szám!')   
+                notnumber = True
+                while(notnumber):   
+                    try:
+                        szamlaszam = str(input('Add meg a számlaszámot ellenőrzésre: '))
+                        if szamlaszam != szamla.szamlaszam:
+                            print('Hibás számlaszám!')
+                        else:
+                            notnumber = False
+                        osszeg = float(input('Adj meg egy kiveendő összeget: '))
+                        szamla.kivesz(osszeg)
+                        print(f'{szamla.nev} új egyenlege: {szamla.egyenleg} Ft')
+                        notnumber = False
+                    except ValueError:
+                        print('Ez nem szám!')                                      
