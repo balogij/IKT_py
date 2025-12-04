@@ -39,6 +39,24 @@ class Student:
         self.atlag = atlag
     def kiir(self):
         return f'Név: {self.nev}, Életkor: {self.eletkor}, Átlag: {self.atlag}'
+        
+class Allat:
+    def __init__(self, nev='', eletkor=0):
+        self.nev = nev
+        self.eletkor = eletkor
+
+class Kutya(Allat):
+    def __init__(self, nev='', eletkor=0, fajta=''):
+        super().__init__(nev, eletkor)
+        self.fajta = fajta
+    def hang(self):
+        return 'Vau Vau!'
+class Macska(Allat):
+    def __init__(self, nev='', eletkor=0, szin=''):
+        super().__init__(nev, eletkor)
+        self.szin = szin
+    def hang(self):
+        return 'Miau Miau!'
 
 #feladatok listája
 feladatok = ['1. feladat – Faktoriális számítása ciklussal. Kérj be egy számot, és számold ki a faktoriálisát iterációval.','2. feladat – Kérj be egy N számot, és számold ki az 1-től N-ig terjedő számok szorzatát (faktoriális ELLENTÉTE: itt nem csak N!, hanem általánosan 1·2·3…·N).','3. feladat – Prímszám ellenőrzése. Döntsd el egy számról, hogy prímszám-e (szelekció + iteráció).','4. feladat – Számjegyek összege. Kérj be egy számot, majd számold ki a számjegyeinek összegét.','5. feladat – Lista elemeinek négyzetre emelése. Adott egy lista, készíts új listát, amely minden elem négyzetét tartalmazza.','6. feladat – Szótár gyakorlás. Kérj be 5 nevet és életkort, majd tárold őket egy dict-ben. Ezután írd ki a legidősebb személy nevét.','7. feladat – OOP: Egyszerű Osztály. Hozz létre egy Auto osztályt, amely attribútumai: márka, típus, évjárat. Az osztály tartalmazzon metódust, ami kiírja a teljes adatot szép formában.','9. feladat – OOP + lista: Tanulók kezelése. Student osztály: név, életkor, átlag.Kérj be 3 tanulót, tedd őket listába, majd írd ki annak a nevét, akinek a legjobb az átlaga.','10. feladat – OOP: Öröklődés. Készíts egy Allat alaposztályt (név, életkor).Készíts két leszármazottat: Kutya (plusz: fajta) Macska (plusz: szín) Mindkettőnek legyen hang() metódusa, ami kiírja a saját hangját. Példányosítsd őket és hívd meg a metódust.']
@@ -239,3 +257,63 @@ while (fut):
                         notnumber = False
                     except ValueError:
                         print('Ez nem szám!')                                      
+            #kilencedik feladat
+            case 9:
+                print(feladatok[sorszam-1])
+                print('Megoldas:')
+                students = []
+                for _i in range(3):
+                    student = Student()
+                    student.nev = str(input('Add meg a tanuló nevét: '))
+                    notnumber = True
+                    while(notnumber):
+                        try:
+                            student.eletkor = int(input('Add meg a tanuló életkorát: '))
+                            notnumber = False
+                        except ValueError:
+                            print('Ez nem egész szám!')
+                    notnumber = True
+                    while(notnumber):
+                        try:
+                            student.atlag = float(input('Adj meg egy számot (0-5): '))
+                            if student.atlag < 0 or student.atlag > 5:
+                                print('Az átlag csak 0 és 5 között lehet!')
+                            else:
+                                notnumber = False
+                        except ValueError:
+                            print('Ez nem szám!')
+                    students.append(student)
+                legjobb = max(students, key=lambda s: s.atlag)
+                print(f'A legjobb átlagú tanuló: {legjobb.nev} ({legjobb.eletkor} éves), átlaga: {legjobb.atlag}')
+
+            #tizedik feladat
+            case 10:
+                print(feladatok[sorszam-1])
+                print('Megoldas:')
+                kutya = Kutya()
+                kutya.nev = str(input('Add meg a kutya nevét: '))
+                notnumber = True
+                while(notnumber):
+                    try:
+                        kutya.eletkor = int(input('Add meg a kutya életkorát: '))
+                        notnumber = False
+                    except ValueError:
+                        print('Ez nem egész szám!')
+                kutya.fajta = str(input('Add meg a kutya fajtáját: '))
+                print(f'A kutya neve: {kutya.nev}, kora: {kutya.eletkor}, fajtája: {kutya.fajta}')
+                print(f'A kutya hangja: {kutya.hang()}')
+                macska = Macska()
+                macska.nev = str(input('Add meg a macska nevét: '))
+                notnumber = True
+                while(notnumber):
+                    try:
+                        macska.eletkor = int(input('Add meg a macska életkorát: '))
+                        notnumber = False
+                    except ValueError:
+                        print('Ez nem egész szám!')
+                macska.szin = str(input('Add meg a macska színét: '))
+                print(f'A macska neve: {macska.nev}, kora: {macska.eletkor}, színe: {macska.szin}')
+                print(f'A macska hangja: {macska.hang()}')
+            case _:
+                print('Nincs ilyen sorszámú feladat!')
+
