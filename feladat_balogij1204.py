@@ -59,7 +59,15 @@ class Macska(Allat):
         return 'Miau Miau!'
 
 #feladatok listája
-feladatok = ['1. feladat – Faktoriális számítása ciklussal. Kérj be egy számot, és számold ki a faktoriálisát iterációval.','2. feladat – Kérj be egy N számot, és számold ki az 1-től N-ig terjedő számok szorzatát (faktoriális ELLENTÉTE: itt nem csak N!, hanem általánosan 1·2·3…·N).','3. feladat – Prímszám ellenőrzése. Döntsd el egy számról, hogy prímszám-e (szelekció + iteráció).','4. feladat – Számjegyek összege. Kérj be egy számot, majd számold ki a számjegyeinek összegét.','5. feladat – Lista elemeinek négyzetre emelése. Adott egy lista, készíts új listát, amely minden elem négyzetét tartalmazza.','6. feladat – Szótár gyakorlás. Kérj be 5 nevet és életkort, majd tárold őket egy dict-ben. Ezután írd ki a legidősebb személy nevét.','7. feladat – OOP: Egyszerű Osztály. Hozz létre egy Auto osztályt, amely attribútumai: márka, típus, évjárat. Az osztály tartalmazzon metódust, ami kiírja a teljes adatot szép formában.','9. feladat – OOP + lista: Tanulók kezelése. Student osztály: név, életkor, átlag.Kérj be 3 tanulót, tedd őket listába, majd írd ki annak a nevét, akinek a legjobb az átlaga.','10. feladat – OOP: Öröklődés. Készíts egy Allat alaposztályt (név, életkor).Készíts két leszármazottat: Kutya (plusz: fajta) Macska (plusz: szín) Mindkettőnek legyen hang() metódusa, ami kiírja a saját hangját. Példányosítsd őket és hívd meg a metódust.']
+feladatok = ['1. feladat – Faktoriális számítása ciklussal. Kérj be egy számot, és számold ki a faktoriálisát iterációval.',
+             '2. feladat – Kérj be egy N számot, és számold ki az 1-től N-ig terjedő számok szorzatát (faktoriális ELLENTÉTE: itt nem csak N!, hanem általánosan 1·2·3…·N).','3. feladat – Prímszám ellenőrzése. Döntsd el egy számról, hogy prímszám-e (szelekció + iteráció).',
+             '4. feladat – Számjegyek összege. Kérj be egy számot, majd számold ki a számjegyeinek összegét.',
+             '5. feladat – Lista elemeinek négyzetre emelése. Adott egy lista, készíts új listát, amely minden elem négyzetét tartalmazza.',
+             '6. feladat – Szótár gyakorlás. Kérj be 5 nevet és életkort, majd tárold őket egy dict-ben. Ezután írd ki a legidősebb személy nevét.',
+             '7. feladat – OOP: Egyszerű Osztály. Hozz létre egy Auto osztályt, amely attribútumai: márka, típus, évjárat. Az osztály tartalmazzon metódust, ami kiírja a teljes adatot szép formában.',
+             '8. feladat – OOP: BankAccount osztály. Készíts egy BankAccount osztályt: attribútumok: név, egyenleg. metódusok: deposit(), withdraw(), get_balance() Hozz létre két bankszámla objektumot, és teszteld.',
+             '9. feladat – OOP + lista: Tanulók kezelése. Student osztály: név, életkor, átlag.Kérj be 3 tanulót, tedd őket listába, majd írd ki annak a nevét, akinek a legjobb az átlaga.',
+             '10. feladat – OOP: Öröklődés. Készíts egy Allat alaposztályt (név, életkor).Készíts két leszármazottat: Kutya (plusz: fajta) Macska (plusz: szín) Mindkettőnek legyen hang() metódusa, ami kiírja a saját hangját. Példányosítsd őket és hívd meg a metódust.']
 
 countFeladat = len(feladatok)
 
@@ -300,7 +308,7 @@ while (fut):
                     except ValueError:
                         print('Ez nem egész szám!')
                 kutya.fajta = str(input('Add meg a kutya fajtáját: '))
-                print(f'A kutya neve: {kutya.nev}, kora: {kutya.eletkor}, fajtája: {kutya.fajta}')
+                print(f'{kutya.nev} egy {kutya.eletkor} éves {kutya.fajta} kutya.')
                 print(f'A kutya hangja: {kutya.hang()}')
                 macska = Macska()
                 macska.nev = str(input('Add meg a macska nevét: '))
@@ -312,7 +320,7 @@ while (fut):
                     except ValueError:
                         print('Ez nem egész szám!')
                 macska.szin = str(input('Add meg a macska színét: '))
-                print(f'A macska neve: {macska.nev}, kora: {macska.eletkor}, színe: {macska.szin}')
+                print(f'{macska.nev} egy {macska.eletkor} éves {macska.szin} macska.')
                 print(f'A macska hangja: {macska.hang()}')
             case _:
                 print('Nincs ilyen sorszámú feladat!')
