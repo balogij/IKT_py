@@ -1,4 +1,17 @@
-feladatok = ['1. feladat – Faktoriális számítása ciklussal. Kérj be egy számot, és számold ki a faktoriálisát iterációval.','2. feladat – Kérj be egy N számot, és számold ki az 1-től N-ig terjedő számok szorzatát (faktoriális ELLENTÉTE: itt nem csak N!, hanem általánosan 1·2·3…·N).','3. feladat – Prímszám ellenőrzése. Döntsd el egy számról, hogy prímszám-e (szelekció + iteráció).','4. feladat – Számjegyek összege. Kérj be egy számot, majd számold ki a számjegyeinek összegét.','5. feladat – Lista elemeinek négyzetre emelése. Adott egy lista, készíts új listát, amely minden elem négyzetét tartalmazza.']
+class Ember:
+    def __init__(self, nev='', kor=0):
+        self.nev = nev
+        self.kor = kor
+    def __str__(self):
+        return f'{self.nev} ({self.kor} éves)'
+    def Maxkor(self, masik):
+        if self.kor > masik.kor:
+            return self
+        else:
+            return masik
+        
+#feladatok listája
+feladatok = ['1. feladat – Faktoriális számítása ciklussal. Kérj be egy számot, és számold ki a faktoriálisát iterációval.','2. feladat – Kérj be egy N számot, és számold ki az 1-től N-ig terjedő számok szorzatát (faktoriális ELLENTÉTE: itt nem csak N!, hanem általánosan 1·2·3…·N).','3. feladat – Prímszám ellenőrzése. Döntsd el egy számról, hogy prímszám-e (szelekció + iteráció).','4. feladat – Számjegyek összege. Kérj be egy számot, majd számold ki a számjegyeinek összegét.','5. feladat – Lista elemeinek négyzetre emelése. Adott egy lista, készíts új listát, amely minden elem négyzetét tartalmazza.','6. feladat – Szótár gyakorlás. Kérj be 5 nevet és életkort, majd tárold őket egy dict-ben. Ezután írd ki a legidősebb személy nevét.']
 
 countFeladat = len(feladatok)
 
@@ -113,6 +126,33 @@ while (fut):
                     print(f'A(z) {i+1}. elem négyzete: {ujlista[i]}')
             #hatodik feladat
             case 6:
+                print(feladatok[sorszam-1])
+                print('Megoldas:')
+                emberek = []
+                curent = Ember()
+
+                for i in range(5):
+                    curent.nev = str(input('Adj meg egy nevet: '))
+                    notnumber = True
+                    while(notnumber):
+                        try:
+                            kor = int(input('Add meg a korát: '))
+                            if kor < 0:
+                                print('A kor nem lehet negatív!')
+                            else:
+                                notnumber = False
+                        except ValueError:
+                            print('Ez nem egész szám!')                        
+                    curent.kor = kor
+                    emberek.append(curent)
+                    curent = Ember()
+                legidosebb = emberek[0]
+                for i in emberek:
+                    legidosebb = legidosebb.Maxkor(i)
+                print(f'A legidősebb személy: {legidosebb.nev}, kora: {legidosebb.kor} éves.')
+
+            #hetedik feladat
+            case 7:
                 print(feladatok[sorszam-1])
                 print('Megoldas:')
                 notnumber = True
